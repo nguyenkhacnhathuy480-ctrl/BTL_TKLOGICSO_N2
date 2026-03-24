@@ -11,7 +11,7 @@ module tb_rtc_top();
     wire [5:0] sec;
     wire [5:0] min;
     wire [4:0] hour;
-    wire [2:0] day;
+    wire [3:0] day;
 
     // 2. Khởi tạo (Instantiate) Design Under Test (DUT)
     rtc_top uut (
