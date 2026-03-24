@@ -26,36 +26,50 @@
 4. Compile project
 5. Chạy mô phỏng bằng ModelSim 
 
-##  Project Structure
-Dự án được tổ chức theo hướng thiết kế module hóa, mỗi chức năng được tách thành một module riêng biệt:
+##  Project structure
 
- -Các file mã nguồn
-clk_div.v
-Module chia xung clock
-→ Tạo tín hiệu 1Hz từ clock hệ thống để làm chuẩn thời gian thực
-mod60_counter.v
-Module bộ đếm mod-60
-→ Dùng cho:
-Giây (0–59)
-Phút (0–59)
-mod24_counter.v
-Module bộ đếm giờ
-→ Đếm từ 0 đến 23
-mod7_counter.v
-Module bộ đếm ngày trong tuần
-→ Đếm từ 1 đến 7
-rtc_top.v
-Module tổng (top module)
-→ Kết nối tất cả các module con
-→ Điều phối hoạt động toàn hệ thống
- -Mô phỏng
-tb_rtc_top.v
-Testbench cho toàn bộ hệ thống
-→ Dùng để kiểm tra hoạt động của RTC trên ModelSim
-→ Mô phỏng tín hiệu clock, reset và quan sát output
- -Đặc điểm thiết kế
-Thiết kế theo hướng module hóa → dễ hiểu, dễ sửa lỗi
-Kiến trúc phân cấp (top-down)
-Hệ thống đồng bộ theo xung clock
-Cơ chế đếm dạng truyền carry:
-Giây → Phút → Giờ → Ngày
+Dự án được thiết kế theo hướng **module hóa**, trong đó mỗi chức năng được xây dựng thành một module riêng biệt nhằm tăng tính dễ hiểu, dễ bảo trì và mở rộng.
+
+###  Các file mã nguồn
+
+- **`clk_div.v`**  
+  Module chia tần số clock  
+  → Tạo xung **1Hz** từ clock hệ thống để phục vụ việc đếm thời gian thực  
+
+- **`mod60_counter.v`**  
+  Module bộ đếm mod-60  
+  → Sử dụng cho:
+  - Giây (0–59)  
+  - Phút (0–59)  
+
+- **`mod24_counter.v`**  
+  Module bộ đếm giờ  
+  → Đếm trong khoảng **0 đến 23**  
+
+- **`mod7_counter.v`**  
+  Module bộ đếm ngày trong tuần  
+  → Đếm trong khoảng **1 đến 7**  
+
+- **`rtc_top.v`**  
+  Module tổng của hệ thống  
+  → Kết nối các module con  
+  → Điều phối luồng tín hiệu giữa các khối  
+
+---
+
+###  Mô phỏng
+
+- **`tb_rtc_top.v`**  
+  Testbench của hệ thống  
+  → Dùng để kiểm tra hoạt động của toàn bộ thiết kế trên ModelSim  
+  → Mô phỏng tín hiệu clock, reset và quan sát output  
+
+---
+
+##  Đặc điểm thiết kế
+
+- Thiết kế theo hướng **module hóa (Modular Design)**  
+- Kiến trúc **phân cấp (Hierarchical Design)**  
+- Hệ thống **đồng bộ theo xung clock (Synchronous System)**  
+- Cơ chế đếm dạng **truyền carry (Cascade Counter)**:
+  - Giây → Phút → Giờ → Ngày  
