@@ -4,7 +4,7 @@ module rtc_top(
     output [5:0] sec,
     output [5:0] min,
     output [4:0] hour,
-    output [2:0] day
+    output [3:0] day
 );
     wire clk_1hz;
     wire carry_sec, carry_min, carry_hour;
